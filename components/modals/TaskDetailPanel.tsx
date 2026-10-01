@@ -12,6 +12,9 @@ import {
   History,
   Clock,
   Plus,
+  Paperclip,
+  ExternalLink,
+  Image as ImageIcon,
 } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 
@@ -335,6 +338,43 @@ export function TaskDetailPanel() {
                 </button>
               </div>
             </div>
+
+            {/* Attachments & Notion Screenshots */}
+            {task.attachments && task.attachments.length > 0 && (
+              <div>
+                <label className="block text-[10px] font-bold text-[#808080] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <Paperclip className="w-3 h-3 text-[#ededed]" />
+                  Attachments & Files ({task.attachments.length})
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {task.attachments.map((att: any) => (
+                    <a
+                      key={att.id}
+                      href={att.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-2 rounded-lg bg-[#262626] border border-[#333333] hover:border-[#555555] transition overflow-hidden"
+                    >
+                      <div className="aspect-video w-full rounded bg-[#1f1f1f] overflow-hidden mb-1.5 flex items-center justify-center border border-[#2d2d2d]">
+                        {att.url.match(/\.(png|jpe?g|svg|webp|gif)$/i) ? (
+                          <img
+                            src={att.url}
+                            alt={att.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
+                          />
+                        ) : (
+                          <ImageIcon className="w-6 h-6 text-[#707070]" />
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] text-[#ededed]">
+                        <span className="truncate font-medium">{att.name}</span>
+                        <ExternalLink className="w-3 h-3 text-[#707070] group-hover:text-[#ededed] shrink-0 ml-1" />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Subtasks */}
             <div>

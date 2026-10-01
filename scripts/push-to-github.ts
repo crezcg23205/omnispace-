@@ -150,7 +150,7 @@ async function main() {
     method: "POST",
     headers,
     body: JSON.stringify({
-      message: "Deploy OmniSpace workspace with Notion relational database & Telegram bot",
+      message: "Import complete Notion archive (44 tasks, 8 clients, attachments, real deadlines)",
       tree: treeData.sha,
       parents: parentCommitSha ? [parentCommitSha] : [],
     }),
